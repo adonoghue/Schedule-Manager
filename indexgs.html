@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+            <link href="/static/css/style.css" rel="stylesheet">
+	  <style>
+	    .buttonAdd{
+		background: #0dd2e0;
+  		background-image: -webkit-linear-gradient(top, #0dd2e0, #2b4eb8);
+ 		background-image: -moz-linear-gradient(top, #0dd2e0, #2b4eb8);
+ 		background-image: -ms-linear-gradient(top, #0dd2e0, #2b4eb8);
+  		background-image: -o-linear-gradient(top, #0dd2e0, #2b4eb8);
+  		background-image: linear-gradient(to bottom, #0dd2e0, #2b4eb8);
+  		-webkit-border-radius: 28;
+  		-moz-border-radius: 28;
+  		border-radius: 28px;
+  		font-family: Arial;
+  		color: #ffffff;
+  		font-size: 13px;
+  		padding: 7px 20px 10px 20px;
+ 		text-decoration: none;
+		height: 30px;
+		width: 130px;
+	    }
+	.switch {
+  		position: relative;
+  		display: inline-block;
+  		width: 60px;
+  		height: 34px;
+	}
+	.slider {
+ 		position: absolute;
+  		cursor: pointer;
+  		top: 0;
+  		left: 0;
+  		right: 0;
+  		bottom: 0;
+  		background-color: #ccc;
+  		-webkit-transition: .4s;
+  		transition: .4s;
+		border-radius: 45%;
+		}
+	.slider:before {
+  		position: absolute;
+  		content: "";
+  		height: 26px;
+  		width: 26px;
+  		left: 4px;
+  		bottom: 4px;
+  		background-color: white;
+  		-webkit-transition: .4s;
+  		transition: .4s;
+		border-radius: 45%;
+	}
+
+	input:checked + .slider {
+  		background-color: #2196F3;
+	}
+
+	input:focus + .slider {
+  		box-shadow: 0 0 1px #2196F3;
+	}
+
+	input:checked + .slider:before {
+  		-webkit-transform: translateX(26px);
+  		-ms-transform: translateX(26px);
+  		transform: translateX(26px);
+	}
+	.slider.round {
+		border-radius: 34px;
+	}	
+
+	.slider.round:before {
+		border-radius: 45%;
+	}
+
+	.switch input {display:none;}
+
+	#header {
+		background: #ccc;
+		height: 40px;
+		text-align: center;
+	}
+	
+	/* Popup container */
+	.popup {
+   		position: relative;
+    		display: inline-block;
+    		cursor: pointer;
+		left: 0px;
+		top: 20px;
+	}
+
+	/* The actual popup */
+	.popup .popuptext {
+    		visibility: hidden;
+   		width: 160px;
+   		background-color: #555;
+   		color: #fff;
+    		text-align: center;
+   		border-radius: 6px;
+   		padding: 8px 0;
+    		position: absolute;
+   		z-index: 1;
+   		bottom: 125%;
+   		left: 0%;
+    		margin-left: 8px;
+	}
+
+	/* Popup arrow */
+	.popup .popuptext::after {
+   		content: "";
+   		position: absolute;
+   		top: 100%;
+   		left: 0%;
+   		margin-left: 4px;
+   		border-width: 5px;
+   	 	border-style: solid;
+   	 	border-color: #555 transparent transparent transparent;
+	}
+
+	/*when  click on the popup container */
+	.popup .show {
+   		 visibility: visible;
+    		-webkit-animation: fadeIn 1s;
+   		 animation: fadeIn 1s
+		}
+
+	/* fade when opoup */
+	@-webkit-keyframes fadeIn {
+    		from {opacity: 0;} 
+    		to {opacity: 1;}
+	}
+
+	@keyframes fadeIn {
+    		from {opacity: 0;}
+    		to {opacity:1 ;}
+	}
+	</style>
+	  <!-- JS function for popup info text-->	
+	  <script>
+	    function myFunction() {
+   	    var popup = document.getElementById("myPopup");
+            popup.classList.toggle("show");
+	}
+	  </script>
+<!--                     Reference to Google Search                   -->
+	  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATC_s9O3JQlXNjGARTquUynypRuJiE6kc
+&libraries=places"></script>
+<!--....................................................................-->
+          </head>
+
+	  <header id="header">
+	    <h1>Schedule Manager</h1>
+	  </header>	
+	   <div style="background-color:white;background-image:url(https://www.xmple.com/wallpaper/gradient-blue-cyan-linear-1280x720-c2-1806d9-28f3f5-a-60-f-14.svg);border:0px solid black;width:100%;height:755px;font-size:18px;">
+	  <h1 style="color:white;padding-left:40px">Add Event:</h1>
+	  <iframe id="ifram" src="https://calendar.google.com/calendar/embed?src=cphan2%40nd.edu&ctz=America/New_York" style="border: 0;padding-right:50px" width="700" height="600" frameborder="100" scrolling="no" align="right"></iframe>
+	 <!--<iframe id="ifram" src="https://calendar.google.com/calendar/embed?src=aemiledonoghue%40gmail.com&ctz=America/New_York" style="border: 0;padding-right:50px" width="700" height="600" frameborder="100" scrolling="no" align="right"></iframe>-->
+          <body style="font-family:tahoma;">
+            <form method="get" action="generateEvent">
+	      <ul style="list-style:none;">
+	      <div class="searchAndName">
+		<form>
+		  <h4 style="color:white;">Name:</h4>
+		  <input type="search" onsearch="searchByType" name="search_query">
+		  <input type="submit">
+                  <input type="text" value="Event Name" name="event" />
+		  <font color="white">
+		    <b><label for="search">Search:</label></b>
+		  </font>
+		</form>
+		</div>
+		<div class="dateAndSearch">
+		  <h4 style="color:white">Date:</h4>
+		  <input type="text" value="mm-dd-yyyy" name="date"/>
+		</div>
+		<div class="time">
+		<h4 style="color:white">Start Time:</h4>
+	        <li><input type="text" value="12:00" name="stime" /></li>
+		  <a style="color:white">AM</a>
+		   <label class="switch">
+		    <!-- returns true or false, true for PM -->
+ 		    <input type="checkbox" value="true" name="startToggle">
+  		    <span class="slider round"></span>
+		  </label>
+		  <a style="color:white">PM</a>
+		  <label class="switch">
+		</div>
+		<div class="time">
+		<h4 style="color:white">End Time:</h4>
+	        <li><input type="text" value="12:00" name="etime" /></li>
+		  <a style="color:white">AM</a>
+		  <label class="switch">
+  		    <input type="checkbox" value="true" name="endToggle">
+  		    <span class="slider round"></span>
+		  </label>
+		  <a style="color:white">PM</a>
+		</div>
+	 	<h1 style="color:white">Quick Add</h1>
+		<h6 style="margin-bottom:0px;margin-top:0px;color:white">Insert event into calendar by only specifying a date and start time</h6>
+
+	  	<div class="popup" onclick="myFunction()"; style="color:white">info
+	    	  <span class ="popuptext" id="myPopup">Meal : 1hr 
+			<br> Gym : 1hr 
+			<br> Study break : 10mins 
+			<br> Meeting : 30mins 
+			<br> Hair appointment : 1.5 hrs 
+		  </span> <!-- Search Bar-->
+		<select name="quickAdd">
+ 		  <option value="None"> </option>
+ 		  <option value="Breakfast">Breakfast</option>
+  		  <option value="Lunch">Lunch</option>
+ 		  <option value="Dinner">Dinner</option>
+ 		  <option value="Gym">Gym</option>
+ 		  <option value="StudyBreak">Study Break</option>
+  		  <option value="Meeting">Meeting</option>
+ 		  <option value="HairApp">Hair Appointment</option>
+	        </select>	
+		<h3> </h3>
+	  <!-- pop up info about autofill-->
+	  <!--<h1 style="color:white;padding-left:40px;">Quick Add</h1>-->
+	  <!--<div class="popup" onclick="myFunction()"; style="color:white">info
+	    <span class ="popuptext" id="myPopup">Meal : 1hr <br> Gym : 1hr <br> Study break : 10mins <br> Meeting : 30mins <br> Hair appointment : 1.5 hrs </span>  Search Bar-->
+               
+		 <button onclick="refresh()" type="submit" style="background-color:lightblue" 
+		  class="buttonAdd">Add Event </button>
+
+	      </ul>
+            </form>
+	  <!-- pop up info about autofill
+	  <h1 style="color:white;padding-left:40px;">Quick Add</h1>
+	  <div class="popup" onclick="myFunction()"; style="color:white">info
+	    <span class ="popuptext" id="myPopup">Meal : 1hr <br> Gym : 1hr <br> Study break : 10mins <br> Meeting : 30mins <br> Hair appointment : 1.5 hrs </span>
+	  -->
+
+	  </div> 
+          </body>
+	  </div>
+</html>
